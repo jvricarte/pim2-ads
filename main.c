@@ -12,6 +12,8 @@ int main(int argc, char *argv[]) {
 	// Tela de login
 	do {
 		printf("------------------------------\n");
+		printf("        CADASTRO MED\n");
+		printf("------------------------------\n");
 		printf("           LOGIN\n");
 		printf("------------------------------\n");
 		printf("Usuario: ");
@@ -26,17 +28,18 @@ int main(int argc, char *argv[]) {
 				system("cls");
 				
 				// Tela incial
-				printf("------------------------------\n");
-				printf("        CADASTRO MED\n");
-				printf("------------------------------\n");
+				printf("-------------------------------\n");
+				printf("  REDE DE CLÍNICAS MED-CORPUS\n");
+				printf("-------------------------------\n");
 				printf("Bem vindo(a)!\nEscolha uma das opcoes abaixo.\n");
-				printf("1 - CONSULTAR CLIENTE\n");
-				printf("2 - CADASTRAR CLIENTE\n");
+				printf("1 - CONSULTAR PACIENTE\n");
+				printf("2 - CADASTRAR PACIENTE\n");
 				printf("3 - AGENDAR CONSULTA\n");
 				printf("4 - CANCELAR CONSULTA\n");
 				printf("5 - AGENDAR EXAME\n");
 				printf("6 - CANCELAR EXAME\n");
-				printf("7 - SAIR DO SISTEMA\n");
+				printf("7 - VISUALIZAR AGENDA\n");
+				printf("10 - SAIR DO SISTEMA\n");
 				printf("Digite a sua opcao: ");
 				scanf("%d", &opc);
 			} else{
@@ -49,7 +52,7 @@ int main(int argc, char *argv[]) {
 			printf("Digite 0 para sair ou qualquer numero para tentar novamente: ");
 			scanf("%d", &opc);
 		}
-	} while (opc != 0 && opc != 7);
+	} while (opc != 0 && opc != 10);
 	printf("Saindo... Ate logo!");
 	
 	return 0;
