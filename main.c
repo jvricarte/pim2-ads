@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <locale.h>
+#include <string.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
@@ -11,9 +12,11 @@ int main(int argc, char *argv[]) {
 	char usuario[11], senha[11];
 	
 	//Protótipos
+	void consultar_paciente();
 	void cadastrar_paciente();
 	void agendar_consulta();
 	void cancelar_consulta();
+	
 	
 	
 	do {
@@ -46,20 +49,22 @@ int main(int argc, char *argv[]) {
 				printf("5 - AGENDAR EXAME\n");
 				printf("6 - CANCELAR EXAME\n");
 				printf("7 - VISUALIZAR AGENDA\n");
-				printf("10 - SAIR DO SISTEMA\n");
+				printf("8 - SAIR DO SISTEMA\n");
 				printf("Digite a sua opcao: ");
 				scanf("%d", &opc);
 				system("cls");
 				
 				// Validando escolha
-				if (opc == 2){
+				if (opc == 1){
+					consultar_paciente();
+				} else if (opc == 2 ){
 					cadastrar_paciente();
-				} else if (opc == 3 ){
+				} else if (opc == 3) {
 					agendar_consulta();
-				} else if (opc == 4) {
+				} else if (opc == 4){
 					cancelar_consulta();
 				} else {
-					printf("Opção inválida!\n");
+					printf("OPÇÃO INVÁLIDA\n");
 				}
 				
 			} else{
@@ -72,13 +77,60 @@ int main(int argc, char *argv[]) {
 			printf("Digite 0 para sair ou qualquer numero para tentar novamente: ");
 			scanf("%d", &opc);
 		}
-	} while (opc != 0 && opc != 10);
+	} while (opc != 0 && opc != 8);
 	printf("Saindo... Ate logo!");
+	system("pause");
 	
 	return 0;
 }
 
 // Funções
+void consultar_paciente() {
+	int resp, i;
+
+	struct ficha_paciente{
+	  char nome[50];
+	  char cpf[15];
+	  char data_nasc[11];
+	  char telefone[15];
+  	}paciente[4];
+
+    // Dados cadastrados
+    strcpy(paciente[0].nome, "Joana Pereia");
+    strcpy(paciente[0].cpf, "054.963.478-00");
+    strcpy(paciente[0].data_nasc, "06/07/1990");
+    strcpy(paciente[0].telefone, "61981259632");
+    strcpy(paciente[1].nome, "Diego Barros");
+    strcpy(paciente[1].cpf, "917.938.910-44");
+    strcpy(paciente[1].data_nasc, "01/03/1988");
+    strcpy(paciente[1].telefone, "61999874563");
+    strcpy(paciente[2].nome, "Andressa Santana");
+    strcpy(paciente[2].cpf, "789.130.070-45");
+    strcpy(paciente[2].data_nasc, "08/11/2000");
+    strcpy(paciente[2].telefone, "61991653258");
+
+    do {
+      printf("\n|------- Pacientes cadastrados -------|\n\n\n");
+      for (i = 0; i < 3; i++) {
+      printf("Nome: %s\n", paciente[i].nome);
+      printf("CPF: %s\n", paciente[i].cpf);
+      printf("Data de nascimento: %s\n", paciente[i].data_nasc);
+      printf("Telefone: %s\n", paciente[i].telefone);
+      printf("---------------------------------------\n");
+      }
+      printf("Aperte 0 para voltar: ");
+      scanf("%d", &resp);
+      fflush(stdin);
+      if (resp == 0) {
+      	system("cls");
+        printf("Voltando...\n");
+      } else {
+      	system("cls");
+		printf("OPÇÃO INVÁLIDA!\n");
+      }
+    } while (resp != 0);
+}
+
 void cadastrar_paciente() {
 	int resp_cadastro;
 	int i;
