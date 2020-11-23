@@ -16,6 +16,8 @@ int main(int argc, char *argv[]) {
 	void cadastrar_paciente();
 	void agendar_consulta();
 	void cancelar_consulta();
+	void agendar_exame();
+	void cancelar_exame();
 	
 	
 	
@@ -50,7 +52,7 @@ int main(int argc, char *argv[]) {
 				printf("6 - CANCELAR EXAME\n");
 				printf("7 - VISUALIZAR AGENDA\n");
 				printf("8 - SAIR DO SISTEMA\n");
-				printf("Digite a sua opcao: ");
+				printf("Digite a sua opção: ");
 				scanf("%d", &opc);
 				system("cls");
 				
@@ -63,6 +65,10 @@ int main(int argc, char *argv[]) {
 					agendar_consulta();
 				} else if (opc == 4){
 					cancelar_consulta();
+				} else if (opc == 5){
+					agendar_exame();
+				} else if (opc == 6) {
+					cancelar_exame();
 				} else {
 					printf("OPÇÃO INVÁLIDA\n");
 				}
@@ -79,7 +85,6 @@ int main(int argc, char *argv[]) {
 		}
 	} while (opc != 0 && opc != 8);
 	printf("Saindo... Ate logo!");
-	system("pause");
 	
 	return 0;
 }
@@ -162,6 +167,7 @@ void cadastrar_paciente() {
 		printf("Deseja cadastrar outro paciente? (1 para sim / 0 para não): ");
 		scanf("%d", &resp_cadastro);
 		fflush(stdin);
+		system("cls");
 		if (resp_cadastro == 0){
 		  break;
 		}
@@ -214,7 +220,7 @@ void cancelar_consulta(){
 	int resp1, resp2;
 	for (int i = 0; i < 1; i++){
 		while (resp1 != 0) {
-			printf("\n|------- Cancelando consulta -------|\n\n\n");
+			printf("\n|-------------------------- Cancelando consulta --------------------------|\n\n\n");
 			printf("Código da consulta: ");
 			scanf("%s", codigo);
 			fflush(stdin);
@@ -233,4 +239,71 @@ void cancelar_consulta(){
 	}
 	system("cls");
 	printf("CONSULTA %s CANCELADA COM SUCESSO!\n", codigo);
+}
+
+void agendar_exame() {
+	int resp = 0;
+	int i;
+	
+	struct ficha_exame{
+		char cpf_paciente[15];
+		char tipo_exame[25];
+		char data[11];
+		char hora[6];
+	};
+	struct ficha_exame exame;
+	
+	for (i = 0; i < 1; i++){
+		// Entrada
+		printf("\n|------- Agendando exame -------|\n\n\n");
+		printf("Código do exame: %d \n", rand() % 1000);
+		fflush(stdin);
+		printf("CPF do paciente: ");
+		fgets(exame.cpf_paciente, 15, stdin);
+		fflush(stdin);
+		printf("Tipo do exame: ");
+		fgets(exame.tipo_exame, 25, stdin);
+		fflush(stdin);
+		printf("Data: ");
+		fgets(exame.data, 11, stdin);
+		fflush(stdin);
+		printf("Hora: ");
+		fgets(exame.hora, 6, stdin);
+		fflush(stdin);
+		// Saída
+		printf("AGENDADO COM SUCESSO! \n");
+		i--;
+		printf("1 para continuar / 0 para sair: ");
+		scanf("%d", &resp);
+		system("cls");
+		if (resp == 0) {
+			break;
+		}
+	}
+}
+
+void cancelar_exame() {
+	char codigo[5];
+	int resp1, resp2;
+	for (int i = 0; i < 1; i++){
+		while (resp1 != 0) {
+			printf("\n|-------------------------- Cancelando exame --------------------------|\n\n\n");
+			printf("Código do exame: ");
+			scanf("%s", codigo);
+			fflush(stdin);
+			printf("Tem certeza que deseja cancelar o exame %s? (1 para sim / 0 para não): ", codigo);
+			scanf("%d", &resp2);
+			if (resp2 == 1) {
+				break;
+			}else if (resp2 == 0){
+				system("cls");
+				printf("EXAME NÃO CANCELADO!\n");
+			} else{
+				system("cls");
+				printf("Opção inválida!\n");
+			}
+		}
+	}
+	system("cls");
+	printf("EXAME %s CANCELADO COM SUCESSO!\n", codigo);
 }
