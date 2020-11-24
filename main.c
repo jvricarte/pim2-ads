@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 	void cancelar_consulta();
 	void agendar_exame();
 	void cancelar_exame();
+	void ver_agenda();
 	
 	
 	
@@ -28,7 +29,7 @@ int main(int argc, char *argv[]) {
 		printf("------------------------------\n");
 		printf("           LOGIN\n");
 		printf("------------------------------\n");
-		printf("Usuario: ");
+		printf("Usuário: ");
 		scanf("%s", usuario);
 		
 		// Validando Usuário
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
 				printf("-------------------------------\n");
 				printf("  REDE DE CLÍNICAS MED-CORPUS\n");
 				printf("-------------------------------\n");
-				printf("Bem vindo(a)!\nEscolha uma das opcoes abaixo.\n");
+				printf("Bem vindo(a)!\nEscolha uma das opções abaixo.\n");
 				printf("1 - CONSULTAR PACIENTE\n");
 				printf("2 - CADASTRAR PACIENTE\n");
 				printf("3 - AGENDAR CONSULTA\n");
@@ -69,22 +70,26 @@ int main(int argc, char *argv[]) {
 					agendar_exame();
 				} else if (opc == 6) {
 					cancelar_exame();
+				} else if (opc == 7) {
+					ver_agenda();
+				} else if (opc == 8) {
+					printf("Saindo... ");
 				} else {
 					printf("OPÇÃO INVÁLIDA\n");
 				}
 				
 			} else{
-				printf("Senha invalida\n");
+				printf("Senha inválida\n");
 				printf("Digite 0 para sair ou qualquer tecla para tentar novamente: ");
 				scanf("%d", &opc);
 			}
 		} else{
-			printf("Usuario invalido\n");
-			printf("Digite 0 para sair ou qualquer numero para tentar novamente: ");
+			printf("Usuário inválido\n");
+			printf("Digite 0 para sair ou qualquer número para tentar novamente: ");
 			scanf("%d", &opc);
 		}
 	} while (opc != 0 && opc != 8);
-	printf("Saindo... Ate logo!");
+	printf("Até logo!");
 	
 	return 0;
 }
@@ -101,7 +106,7 @@ void consultar_paciente() {
   	}paciente[4];
 
     // Dados cadastrados
-    strcpy(paciente[0].nome, "Joana Pereia");
+    strcpy(paciente[0].nome, "Joana Pereira");
     strcpy(paciente[0].cpf, "054.963.478-00");
     strcpy(paciente[0].data_nasc, "06/07/1990");
     strcpy(paciente[0].telefone, "61981259632");
@@ -306,4 +311,64 @@ void cancelar_exame() {
 	}
 	system("cls");
 	printf("EXAME %s CANCELADO COM SUCESSO!\n", codigo);
+}
+
+void ver_agenda() {
+	int resp, i;
+
+	struct agenda{
+	  char nome_paciente[50];
+	  char nome_medico[50];
+    char cons_ou_exame[11];
+    char tipo[11];
+	  char data[11];
+	  char hora[7];
+  	}agenda[3];
+
+    // Dados cadastrados
+    strcpy(agenda[0].nome_paciente, "Joana Pereira");
+    strcpy(agenda[0].nome_medico, "Anderson Souza");
+    strcpy(agenda[0].cons_ou_exame, "Consulta");
+    strcpy(agenda[0].tipo, "Geral");
+    strcpy(agenda[0].data, "07/12/2020");
+    strcpy(agenda[0].hora, "10:00");
+    strcpy(agenda[1].nome_paciente, "Diego Barros");
+    strcpy(agenda[1].nome_medico, "Bianca Fernandes");
+    strcpy(agenda[1].cons_ou_exame, "Consulta");
+    strcpy(agenda[1].tipo, "Ortopedia");
+    strcpy(agenda[1].data, "08/12/2020");
+    strcpy(agenda[1].hora, "11:00");
+    strcpy(agenda[2].nome_paciente, "Andressa Santana");
+    strcpy(agenda[2].nome_medico, "-------------");
+    strcpy(agenda[2].cons_ou_exame, "Exame");
+    strcpy(agenda[2].tipo, "Hemograma");
+    strcpy(agenda[2].data, "09/12/2020");
+    strcpy(agenda[2].hora, "07:30");
+    fflush(stderr);
+
+    do {
+      printf("\n|------------ Agenda do mês ------------|\n\n\n");
+      for (i = 0; i < 3; i++) {
+      	printf("Código: %d \n", rand() % 1000);
+        printf("Nome do paciente: %s\n", agenda[i].nome_paciente);
+        printf("Nome do(a) médico(a): %s\n", agenda[i].nome_medico);
+        printf("Consulta ou exame: %s\n", agenda[i].cons_ou_exame);
+        printf("Tipo: %s\n", agenda[i].tipo);
+        printf("Data: %s\n", agenda[i].data);
+        printf("Hora: %s\n", agenda[i].hora);
+        printf("---------------------------------------\n");
+        fflush(stderr);
+        
+      }
+      printf("Aperte 0 para voltar: ");
+      scanf("%d", &resp);
+      fflush(stdin);
+      if (resp == 0) {
+      	system("cls");
+        printf("Voltando...\n");
+      } else {
+      	system("cls");
+		printf("OPÇÃO INVÁLIDA!\n");
+      }
+    } while (resp != 0);
 }
